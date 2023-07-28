@@ -41,7 +41,7 @@ public class Menu {
     public static void menuDonHang(){
         System.out.println("-----------MENU-----------");
         System.out.println("1. Hủy đơn hàng");
-        System.out.println("2. Thoát");
+        System.out.println("0. Thoát");
         System.out.println("--------------------------");
     }
 }
