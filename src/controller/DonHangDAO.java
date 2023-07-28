@@ -137,6 +137,50 @@ public class DonHangDAO{
         return dh;
     }
 
+    public ArrayList<DonHang> selectDHDaGiao(){
+        ArrayList<DonHang> listDH = new ArrayList<>();
+
+        DonHang dh = new DonHang();
+        String maDonHang = null;
+        String maKhachHang = null;
+        String maNhanVien = null;
+        String maSach = null;
+        double tongTien = 0;
+        String trangThai = null;
+        int soLuong = 0;
+        KhachHang kh = new KhachHang();
+        NhanVien nv = new NhanVien();
+        try {
+            Connection connection = JDBCUntil.getConnection();
+            String sql = "SELECT * FROM donhang WHERE trangthai=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "Đã giao");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                maDonHang = rs.getString("madonhang");
+                maKhachHang = rs.getString("makhachhang");
+                maNhanVien = rs.getString("manhanvien");
+                maSach = rs.getString("masach");
+                Sach tmp = new SachDAO().selectByBook(maSach);
+                tongTien = rs.getDouble("tongtien");
+                trangThai = rs.getString("trangthai");
+                soLuong = rs.getInt("soluong");
+                tmp.setSoLuong(soLuong);
+                ArrayList<Sach> listSP = new ArrayList<>();
+                listSP.add(tmp);
+                kh = new KhachHangDAO().selectById(maKhachHang);
+                nv = new NhanVienDAO().selectById(maNhanVien);
+                dh = new DonHang(maDonHang, kh, nv, listSP, tongTien, trangThai);
+
+                listDH.add(dh);
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return listDH;
+    }
+
     public void insert(DonHang donHang) {
         try {
             Connection connection = JDBCUntil.getConnection();
@@ -159,10 +203,6 @@ public class DonHangDAO{
         } catch(Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void deleteAll(ArrayList<Sach> list) {
-
     }
 
     public boolean search(String t, String ma){
@@ -208,6 +248,15 @@ public class DonHangDAO{
 
     public void update(DonHang donHang){
         try {
+            // Cập nhật số đơn mỗi nhân viên bán đc
+            NhanVien nhanVien = new NhanVienDAO().selectById(donHang.getNhanVien().getId());
+            nhanVien.setSoDonBanDuoc(nhanVien.getSoDonBanDuoc() + 1);
+            new NhanVienDAO().update(nhanVien);
+            // Cập nhật điểm thưởng cho khách hàng = số đơn hàng đã giao
+            KhachHang khachHang = new KhachHangDAO().selectById(donHang.getKhachHang().getId());
+            khachHang.setDiemThuong(khachHang.getDiemThuong() + 1);
+            new KhachHangDAO().update(khachHang);
+            // Cập nhật trạng thái đơn hàng
             Connection connection = JDBCUntil.getConnection();
             String sql = "UPDATE donhang SET trangthai=? WHERE madonhang=?";
             PreparedStatement st = connection.prepareStatement(sql);

@@ -99,7 +99,7 @@ public class NhanVienDAO{
     public void update(NhanVien nhanVien) {
         try {
             Connection connection = JDBCUntil.getConnection();
-            String sql = "UPDATE theloai SET hovaten=?, ngaysinh=?, diachi=?, sodienthoai=?, email=?, sodonbanduoc=? WHERE manhanvien=?";
+            String sql = "UPDATE nhanvien SET hovaten=?, ngaysinh=?, diachi=?, sodienthoai=?, email=?, sodonbanduoc=? WHERE manhanvien=?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, nhanVien.getHoVaTen());
             st.setDate(2, nhanVien.getNgaySinh());

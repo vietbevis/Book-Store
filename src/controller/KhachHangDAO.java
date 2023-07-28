@@ -101,7 +101,7 @@ public class KhachHangDAO{
     public void update(KhachHang khachHang) {
         try {
             Connection connection = JDBCUntil.getConnection();
-            String sql = "UPDATE theloai SET hovaten=?, ngaysinh=?, diachi=?, sodienthoai=?, email=?, diemthuong=? manhanvien=? WHERE makhachhang=?";
+            String sql = "UPDATE khachhang SET hovaten=?, ngaysinh=?, diachi=?, sodienthoai=?, email=?, diemthuong=? manhanvien=? WHERE makhachhang=?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, khachHang.getHoVaTen());
             st.setDate(2, khachHang.getNgaySinh());

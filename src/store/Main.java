@@ -226,7 +226,26 @@ public class Main {
                                 System.out.println("Nhập mã đơn hàng cần cập nhật :");
                                 String cn = sc.nextLine();
                                 DonHang dh = new DonHangDAO().selectById(cn);
+                                while (dh == null){
+                                    System.out.println("Đơn hàng không tồn tại, vui lòng chọn đơn hàng khác :");
+                                    cn = sc.nextLine();
+                                    dh = new DonHangDAO().selectById(cn);
+                                }
+                                System.out.println("Cập nhật thành công !");
                                 new DonHangDAO().update(dh);
+
+                                break;
+                            case '6':
+                                ArrayList<DonHang> dhDaGiao = new DonHangDAO().selectDHDaGiao();
+                                double loiNhuan = 0;
+                                for(DonHang x : dhDaGiao){
+                                    Sach tmp = new Sach();
+                                    for (Sach y : x.getSach()){
+                                        tmp = y;
+                                    }
+                                    loiNhuan += ((tmp.getGiaBan() - tmp.getGiaNhap()) * tmp.getSoLuong());
+                                }
+                                System.out.println("Lợi nhuận : " + loiNhuan);
                                 break;
                             case '0':
                                 runA = false;

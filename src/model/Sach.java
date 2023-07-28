@@ -133,17 +133,12 @@ public class Sach {
         Sach tmp = new SachDAO().selectByBook(maSach);
         if(tmp != null){
             System.out.println("Nhập số lượng muốn thêm : ");
-            int sl = 0;
-            boolean test = true;
-            while(test){
-                try {
-                    sl = Integer.parseInt(sc.nextLine());
-                    test = false;
-                } catch(Exception e) {
-                    System.out.println("Nhập sai, nhập lại : ");
-                }
+            String sl = sc.nextLine();
+            while (!ChuanHoa.checkInt(sl)){
+                System.out.println("Nhập sai, nhập lại :");
+                sl = sc.nextLine();
             }
-            tmp.setSoLuong(tmp.getSoLuong() + sl);
+            tmp.setSoLuong(tmp.getSoLuong() + Integer.parseInt(sl));
             new SachDAO().update(tmp);
         }
         else {
@@ -185,16 +180,16 @@ public class Sach {
 
     @Override
     public String toString() {
-        return "maSach='" + maSach + '\'' +
-                ", tenSach='" + tenSach + '\'' +
+        return "[maSach=" + maSach +
+                ", tenSach=" + tenSach +
                 ", tacGia=" + tacGia.getHoVaTen() +
                 ", namXuatBan=" + namXuatBan +
                 ", theLoai=" + theLoai.getTenTheLoai() +
-                ", ngonNgu='" + ngonNgu + '\'' +
-                ", moTa='" + moTa + '\'' +
+                ", ngonNgu=" + ngonNgu +
+                ", moTa=" + moTa +
                 ", giaNhap=" + giaNhap +
                 ", giaBan=" + giaBan +
-                ", soLuong=" + soLuong;
+                ", soLuong=" + soLuong +"]";
     }
 
     @Override

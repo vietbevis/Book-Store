@@ -15,6 +15,7 @@ public class Menu {
         System.out.println("3. Thống kê số sách còn lại trong kho");
         System.out.println("4. Hiển thị sanh sách các đơn hàng");
         System.out.println("5. Cập nhật trạng thái đơn hàng");
+        System.out.println("6. Thống kê lợi nhuận");
         System.out.println("0. Thoát");
         System.out.println("--------------------------");
     }

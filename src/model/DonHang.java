@@ -80,7 +80,7 @@ public class DonHang {
         for(Sach x : sach){
             System.out.println("\t" + x);
         }
-        System.out.println("Tổng tiên : " + tongTien);
+        System.out.println("Tổng tiền : " + tongTien);
         System.out.println("Trạng thái đơn hàng : " + trangThai);
         return "";
     }
