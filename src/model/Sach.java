@@ -134,8 +134,8 @@ public class Sach {
         if(tmp != null){
             System.out.println("Nhập số lượng muốn thêm : ");
             String sl = sc.nextLine();
-            while (!ChuanHoa.checkInt(sl)){
-                System.out.println("Nhập sai, nhập lại :");
+            while (!ChuanHoa.checkInt(sl) || Integer.parseInt(sl) <= 0){
+                System.out.println("Nhập sai, nhập lại : ");
                 sl = sc.nextLine();
             }
             tmp.setSoLuong(tmp.getSoLuong() + Integer.parseInt(sl));
@@ -152,7 +152,12 @@ public class Sach {
                 tacGia.input(maTacGia);
             }
             System.out.println("Nhập năm xuất bản :");
-            setNamXuatBan(Integer.parseInt(sc.nextLine()));
+            String nxb = sc.nextLine();
+            while (!ChuanHoa.checkInt(nxb) || Integer.parseInt(nxb) <= 0){
+                System.out.println("Nhập sai, nhập lại : ");
+                nxb = sc.nextLine();
+            }
+            setNamXuatBan(Integer.parseInt(nxb));
             System.out.println("Nhập mã thể loại : ");
             String maTheLoai = sc.nextLine();
             theLoai = new TheLoaiDAO().selectById(maTheLoai);

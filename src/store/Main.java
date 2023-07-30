@@ -183,17 +183,12 @@ public class Main {
                             // Thêm sách vào kho
                             case '1':
                                 System.out.println("Nhập số lượng sách muốn thêm : ");
-                                int sl = 0;
-                                boolean test = true;
-                                while(test){
-                                    try {
-                                        sl = Integer.parseInt(sc.nextLine());
-                                        test = false;
-                                    } catch(Exception e) {
-                                        System.out.println("Nhập sai, nhập lại : ");
-                                    }
+                                String sl = sc.nextLine();
+                                while (!ChuanHoa.checkInt(sl) || Integer.parseInt(sl) <= 0){
+                                    System.out.println("Nhập sai, nhập lại : ");
+                                    sl = sc.nextLine();
                                 }
-                                for(int i=0 ; i<sl ; i++){
+                                for(int i=0 ; i<Integer.parseInt(sl) ; i++){
                                     Sach s = new Sach();
                                     s.input();
                                 }

@@ -64,14 +64,14 @@ public class GioHang {
             s = new SachDAO().selectByBook(sc.nextLine());
         }
         System.out.println("Nhập số lượng muốn thêm : ");
-        int soLuong = Integer.parseInt(sc.nextLine());
+        String soLuong = sc.nextLine();
         int soLuongKho = new SachDAO().selectByBook(s.getMaSach()).getSoLuong();
-        while(soLuong > soLuongKho){
-            System.out.printf("Quá số lượng sách trong kho (%s)\n", soLuongKho);
+        while(Integer.parseInt(soLuong) > soLuongKho || (!ChuanHoa.checkInt(soLuong) || Integer.parseInt(soLuong) <= 0)){
+            System.out.printf("Quá số lượng sách trong kho (%s) hoặc nhập sai, nhập lại\n", soLuongKho);
             System.out.println("Nhập số lượng muốn thêm : ");
-            soLuong = Integer.parseInt(sc.nextLine());
+            soLuong = sc.nextLine();
         }
-        s.setSoLuong(soLuong);
+        s.setSoLuong(Integer.parseInt(soLuong));
         return s;
     }
 
