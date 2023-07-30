@@ -1,5 +1,5 @@
 * Database : sử dụng mySQL, file tạo database bookstore.
-      - Kết nối ở file JDBCUntil.java
+      - Kết nối ở file src/controller/JDBCUntil.java
   
 * Phần đăng nhập :
     - Chọn khách hàng có 2 trường hợp xảy ra :
@@ -12,7 +12,7 @@
     - Đã xử lí trường hợp người dùng nhập sai kiểu dữ liệu yêu cầu, nhập số âm nếu nhập sai sẽ bắt nhập lại
       
 * Phần store :
-    - Có 2 menu chính là khách hàng và nhân viên (xem trong file model/Menu.java)
+    - Có 2 menu chính là khách hàng và nhân viên (xem trong file src/model/Menu.java)
     - Nhân viên :
         + CN1 : Thêm sách vào kho : Nhập mã sách nếu sách này hiện đang có trong db thì sẽ nhập số lượng để thêm vào nếu mã sách nhập vào chưa có thông tin trong db thì sẽ phải nhập đầy đủ thông tin của sách đó (tên sách , tác giả, thể loại mô tả giá nhập giá bán, ...) sau khi thêm thành công db tự động cập 
         + CN2 : Xuất kho : Nhân viên có quyên xuất kho ra cho khách lẻ không đăng kí thông tin vào cửa hàng
