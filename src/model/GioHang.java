@@ -66,7 +66,7 @@ public class GioHang {
         System.out.println("Nhập số lượng muốn thêm : ");
         String soLuong = sc.nextLine();
         int soLuongKho = new SachDAO().selectByBook(s.getMaSach()).getSoLuong();
-        while(Integer.parseInt(soLuong) > soLuongKho || (!ChuanHoa.checkInt(soLuong) || Integer.parseInt(soLuong) <= 0)){
+        while(!ChuanHoa.checkSoAm(soLuong, soLuongKho)){
             System.out.printf("Quá số lượng sách trong kho (%s) hoặc nhập sai, nhập lại\n", soLuongKho);
             System.out.println("Nhập số lượng muốn thêm : ");
             soLuong = sc.nextLine();
@@ -85,31 +85,14 @@ public class GioHang {
             s = new SachDAO().selectByBook(sc.nextLine());
         }
         System.out.println("Nhập số lượng muốn xuất : ");
-        int soLuong = 0;
-        boolean test = true;
-        while(test){
-            try {
-                soLuong = Integer.parseInt(sc.nextLine());
-                test = false;
-            } catch(Exception e) {
-                System.out.println("Nhập sai, nhập lại : ");
-            }
-        }
+        String soLuong = sc.nextLine();
         int soLuongKho = s.getSoLuong();
-        while(soLuong > soLuongKho){
-            System.out.printf("Quá số lượng sách trong kho (%s)\n", soLuongKho);
+        while(!ChuanHoa.checkSoAm(soLuong, soLuongKho)){
+            System.out.printf("Quá số lượng sách trong kho (%s) hoặc nhập sai, nhập lại\n", soLuongKho);
             System.out.println("Nhập số lượng muốn xuất : ");
-            boolean test1 = true;
-            while(test1){
-                try {
-                    soLuong = Integer.parseInt(sc.nextLine());
-                    test1 = false;
-                } catch(Exception e) {
-                    System.out.println("Nhập sai, nhập lại : ");
-                }
-            }
+            soLuong = sc.nextLine();
         }
-        s.setSoLuong(s.getSoLuong() - soLuong);
+        s.setSoLuong(s.getSoLuong() - Integer.parseInt(soLuong));
         new SachDAO().update(s);
     }
 

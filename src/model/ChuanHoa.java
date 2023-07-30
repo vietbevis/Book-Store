@@ -42,4 +42,27 @@ public class ChuanHoa {
             return false;
         }
     }
+
+    public static boolean checkSoAm(String x, int k){
+        if(ChuanHoa.checkInt(x)){
+            if(Integer.parseInt(x) <= 0){
+                return false;
+            }
+            if(Integer.parseInt(x) > k){
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkSoAm(String x){
+        if(ChuanHoa.checkInt(x)){
+            if(Integer.parseInt(x) <= 0){
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }

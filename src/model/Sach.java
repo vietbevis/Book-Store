@@ -134,7 +134,7 @@ public class Sach {
         if(tmp != null){
             System.out.println("Nhập số lượng muốn thêm : ");
             String sl = sc.nextLine();
-            while (!ChuanHoa.checkInt(sl) || Integer.parseInt(sl) <= 0){
+            while (!ChuanHoa.checkSoAm(sl)){
                 System.out.println("Nhập sai, nhập lại : ");
                 sl = sc.nextLine();
             }
@@ -153,7 +153,7 @@ public class Sach {
             }
             System.out.println("Nhập năm xuất bản :");
             String nxb = sc.nextLine();
-            while (!ChuanHoa.checkInt(nxb) || Integer.parseInt(nxb) <= 0){
+            while (!ChuanHoa.checkSoAm(nxb)){
                 System.out.println("Nhập sai, nhập lại : ");
                 nxb = sc.nextLine();
             }
