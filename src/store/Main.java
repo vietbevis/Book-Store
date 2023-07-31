@@ -188,7 +188,7 @@ public class Main {
                                     System.out.println("Vui lòng nhập lại :");
                                     sl = sc.nextLine();
                                 }
-                                for(int i=0 ; i<Integer.parseInt(sl) ; i++){
+                                for(int i=0 ; i<(int)Double.parseDouble(sl) ; i++){
                                     Sach s = new Sach();
                                     s.input();
                                 }

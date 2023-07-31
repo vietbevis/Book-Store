@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ChuanHoa {
     public static String chuanHoaTen(String hoVaTen){
@@ -51,86 +53,135 @@ public class ChuanHoa {
     }
 
     public static String checkAll(String x, int tmp) {
-        boolean kiTu = false, chuCai = false;
-        for (int i = 0; i < x.length(); i++) {
-            if (Character.isAlphabetic(x.charAt(i))) {
-                chuCai = true;
-            } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
-                kiTu = true;
+        x = x.trim();
+        if(x.equals("")){
+            return "Không được bỏ trống";
+        }
+        else {
+            boolean kiTu = false, chuCai = false, dauCach = false;
+            Set<Character> listKiTu = new HashSet<>();
+            for (int i = 0; i < x.length(); i++) {
+                if (Character.isAlphabetic(x.charAt(i))) {
+                    chuCai = true;
+                } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
+                    if(x.charAt(i) != '.'){
+                        listKiTu.add(x.charAt(i));
+                        if(x.charAt(i) == ' '){
+                            dauCach = true;
+                        }
+                    }
+                    kiTu = true;
+                }
             }
-        }
-        if (ChuanHoa.checkInt(x)) {
-            if (Integer.parseInt(x) > tmp) {
-                return "không được quá số lượng trong kho" + "(" + tmp + ")";
+            if (listKiTu.size() == 1){
+                for(Character c : listKiTu){
+                    if(c == ' '){
+                        return "không được chứa dấu cách";
+                    }
+                }
             }
-            else if (Integer.parseInt(x) <= 0) {
-                return "không được nhỏ hơn hoặc bằng 0";
+            if (ChuanHoa.checkInt(x)) {
+                if (Integer.parseInt(x) > tmp) {
+                    return "không được quá số lượng trong kho" + "(" + tmp + ")";
+                }
+                else if (Integer.parseInt(x) <= 0) {
+                    return "không được nhỏ hơn hoặc bằng 0";
+                }
             }
+            else if (checkDouble(x)) {
+                if(Double.parseDouble(x) <= 0){
+                    return "không được nhỏ hơn hoặc bằng 0";
+                }
+                else {
+                    if(Double.parseDouble(x) - (int)Double.parseDouble(x) == 0){
+                        return "";
+                    }
+                }
+                return "phải là số nguyên";
+            }
+            else if (kiTu && chuCai && dauCach) {
+                return "không được chứa kí tự đặc biệt, chữ cái, dấu cách";
+            }
+            else if (kiTu && chuCai && !dauCach) {
+                return "không được chứa kí tự đặc biệt, chữ cái";
+            }
+            else if (kiTu && !chuCai && dauCach) {
+                return "không được chứa kí tự đặc biệt, dấu cách";
+            }
+            else if (!kiTu && chuCai && dauCach) {
+                return "không được chứa kí tự chữ cái, dấu cách";
+            }
+            else if(kiTu && !chuCai && !dauCach){
+                return "không được chứa kí tự đặc biệt";
+            }
+            else
+                return "không được chứa chữ cái";
         }
-        else if (checkDouble(x)) {
-            return "phải là số nguyên";
-        }
-        else if (kiTu && chuCai) {
-            return "không được chứa kí tự đặc biệt, chữ cái";
-        }
-        else if (kiTu && !chuCai) {
-            return "không được chứa kí tự đặc biệt";
-        }
-        else
-            return "không được chứa chữ cái";
         return "";
     }
 
     public static String checkAll(String x) {
-        boolean kiTu = false, chuCai = false;
-        for (int i = 0; i < x.length(); i++) {
-            if (Character.isAlphabetic(x.charAt(i))) {
-                chuCai = true;
-            } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
-                kiTu = true;
+        x = x.trim();
+        if(x.equals("")){
+            return "Không được bỏ trống";
+        }
+        else {
+            boolean kiTu = false, chuCai = false, dauCach = false;
+            Set<Character> listKiTu = new HashSet<>();
+            for (int i = 0; i < x.length(); i++) {
+                if (Character.isAlphabetic(x.charAt(i))) {
+                    chuCai = true;
+                } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
+                    if(x.charAt(i) != '.'){
+                        listKiTu.add(x.charAt(i));
+                        if(x.charAt(i) == ' '){
+                            dauCach = true;
+                        }
+                    }
+                    kiTu = true;
+                }
             }
-        }
-        if (ChuanHoa.checkInt(x)) {
-            if (Integer.parseInt(x) <= 0) {
-                return "không được nhỏ hơn hoặc bằng 0";
+            if (listKiTu.size() == 1){
+                for(Character c : listKiTu){
+                    if(c == ' '){
+                        return "không được chứa dấu cách";
+                    }
+                }
             }
-        }
-        else if (checkDouble(x)) {
-            return "phải là số nguyên";
-        }
-        else if (kiTu && chuCai) {
-            return "không được chứa kí tự đặc biệt, chữ cái";
-        }
-        else if (kiTu && !chuCai) {
-            return "không được chứa kí tự đặc biệt";
-        }
-        else
-            return "không được chứa chữ cái";
-        return "";
-    }
-
-    public static String checkAll1(String x) {
-        boolean kiTu = false, chuCai = false;
-        for (int i = 0; i < x.length(); i++) {
-            if (Character.isAlphabetic(x.charAt(i))) {
-                chuCai = true;
-            } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
-                kiTu = true;
+            if (ChuanHoa.checkInt(x)) {
+                if (Integer.parseInt(x) <= 0) {
+                    return "không được nhỏ hơn hoặc bằng 0";
+                }
             }
-        }
-        if (ChuanHoa.checkDouble(x)) {
-            if (Integer.parseInt(x) <= 0) {
-                return "không được nhỏ hơn hoặc bằng 0";
+            else if (checkDouble(x)) {
+                if(Double.parseDouble(x) <= 0){
+                    return "không được nhỏ hơn hoặc bằng 0";
+                }
+                else {
+                    if(Double.parseDouble(x) - (int)Double.parseDouble(x) == 0){
+                        return "";
+                    }
+                }
+                return "phải là số nguyên";
             }
+            else if (kiTu && chuCai && dauCach) {
+                return "không được chứa kí tự đặc biệt, chữ cái, dấu cách";
+            }
+            else if (kiTu && chuCai && !dauCach) {
+                return "không được chứa kí tự đặc biệt, chữ cái";
+            }
+            else if (kiTu && !chuCai && dauCach) {
+                return "không được chứa kí tự đặc biệt, dấu cách";
+            }
+            else if (!kiTu && chuCai && dauCach) {
+                return "không được chứa kí tự chữ cái, dấu cách";
+            }
+            else if(kiTu && !chuCai && !dauCach){
+                return "không được chứa kí tự đặc biệt";
+            }
+            else
+                return "không được chứa chữ cái";
         }
-        else if (kiTu && chuCai) {
-            return "không được chứa kí tự đặc biệt, chữ cái";
-        }
-        else if (kiTu && !chuCai) {
-            return "không được chứa kí tự đặc biệt";
-        }
-        else
-            return "không được chứa chữ cái";
         return "";
     }
 }

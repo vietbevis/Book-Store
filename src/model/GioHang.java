@@ -71,7 +71,7 @@ public class GioHang {
             System.out.println("Nhập số lượng muốn thêm : ");
             soLuong = sc.nextLine();
         }
-        s.setSoLuong(Integer.parseInt(soLuong));
+        s.setSoLuong((int)Double.parseDouble(soLuong));
         return s;
     }
 
@@ -92,7 +92,7 @@ public class GioHang {
             System.out.println("Nhập số lượng muốn xuất : ");
             soLuong = sc.nextLine();
         }
-        s.setSoLuong(s.getSoLuong() - Integer.parseInt(soLuong));
+        s.setSoLuong(s.getSoLuong() - (int)Double.parseDouble(soLuong));
         new SachDAO().update(s);
     }
 

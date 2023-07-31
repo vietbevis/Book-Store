@@ -17,13 +17,13 @@ public class Sach {
     private TheLoai theLoai;
     private String ngonNgu;
     private String moTa;
-    private double giaNhap;
-    private double giaBan;
+    private int giaNhap;
+    private int giaBan;
     private int soLuong;
 
     public Sach() {}
 
-    public Sach(String maSach, String tenSach, TacGia tacGia, int namXuatBan, TheLoai theLoai, String ngonNgu, String moTa, double giaNhap, double giaBan, int soLuong) {
+    public Sach(String maSach, String tenSach, TacGia tacGia, int namXuatBan, TheLoai theLoai, String ngonNgu, String moTa, int giaNhap, int giaBan, int soLuong) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.tacGia = tacGia;
@@ -92,19 +92,19 @@ public class Sach {
         this.moTa = moTa;
     }
 
-    public double getGiaNhap() {
+    public int getGiaNhap() {
         return giaNhap;
     }
 
-    public void setGiaNhap(double giaNhap) {
+    public void setGiaNhap(int giaNhap) {
         this.giaNhap = giaNhap;
     }
 
-    public double getGiaBan() {
+    public int getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(double giaBan) {
+    public void setGiaBan(int giaBan) {
         this.giaBan = giaBan;
     }
 
@@ -115,7 +115,6 @@ public class Sach {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
-
 
     public static void showAll(){
         SachDAO.thongKeSachTrongKho();
@@ -138,7 +137,7 @@ public class Sach {
                 System.out.printf("Số lượng %s\n", ChuanHoa.checkAll(sl));
                 sl = sc.nextLine();
             }
-            tmp.setSoLuong(tmp.getSoLuong() + Integer.parseInt(sl));
+            tmp.setSoLuong(tmp.getSoLuong() + (int)Double.parseDouble(sl));
             new SachDAO().update(tmp);
         }
         else {
@@ -157,7 +156,7 @@ public class Sach {
                 System.out.printf("Năm xuất bản %s\n", ChuanHoa.checkAll(nxb));
                 nxb = sc.nextLine();
             }
-            setNamXuatBan(Integer.parseInt(nxb));
+            setNamXuatBan((int)Double.parseDouble(nxb));
             System.out.println("Nhập mã thể loại : ");
             String maTheLoai = sc.nextLine();
             theLoai = new TheLoaiDAO().selectById(maTheLoai);
@@ -172,19 +171,19 @@ public class Sach {
 
             System.out.println("Nhập giá nhập : ");
             String giaNhap = sc.nextLine();
-            while (!ChuanHoa.checkAll1(giaNhap).equals("")){
-                System.out.printf("Giá nhập %s\n", ChuanHoa.checkAll1(giaNhap));
+            while (!ChuanHoa.checkAll(giaNhap).equals("")){
+                System.out.printf("Giá nhập %s\n", ChuanHoa.checkAll(giaNhap));
                 giaNhap = sc.nextLine();
             }
-            setGiaNhap(Double.parseDouble(giaNhap));
+            setGiaNhap((int)Double.parseDouble(giaNhap));
 
             System.out.println("Nhập giá bán : ");
             String giaBan = sc.nextLine();
-            while (!ChuanHoa.checkAll1(giaBan).equals("")){
-                System.out.printf("Giá bán %s\n", ChuanHoa.checkAll1(giaBan));
+            while (!ChuanHoa.checkAll(giaBan).equals("")){
+                System.out.printf("Giá bán %s\n", ChuanHoa.checkAll(giaBan));
                 giaBan = sc.nextLine();
             }
-            setGiaBan(Double.parseDouble(giaBan));
+            setGiaBan((int)Double.parseDouble(giaBan));
 
             System.out.println("Nhập số lượng : ");
             String soLuong = sc.nextLine();
@@ -192,7 +191,7 @@ public class Sach {
                 System.out.printf("Số lượng %s\n", ChuanHoa.checkAll(soLuong));
                 soLuong = sc.nextLine();
             }
-            setSoLuong(Integer.parseInt(soLuong));
+            setSoLuong((int)Double.parseDouble(soLuong));
             new SachDAO().insert(this);
         }
     }

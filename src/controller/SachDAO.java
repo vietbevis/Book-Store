@@ -26,8 +26,8 @@ public class SachDAO{
                 String maTheLoai = rs.getString("matheloai");
                 String moTa = rs.getString("mota");
                 String ngonNgu = rs.getString("ngonngu");
-                double giaNhap = rs.getDouble("gianhap");
-                double giaBan = rs.getDouble("giaban");
+                int giaNhap = rs.getInt("gianhap");
+                int giaBan = rs.getInt("giaban");
                 int soLuong = rs.getInt("soluong");
 
                 TacGia tg = new TacGiaDAO().selectById(maTacGia);
@@ -59,8 +59,8 @@ public class SachDAO{
                 String maTheLoai = rs.getString("matheloai");
                 String moTa = rs.getString("mota");
                 String ngonNgu = rs.getString("ngonngu");
-                double giaNhap = rs.getDouble("gianhap");
-                double giaBan = rs.getDouble("giaban");
+                int giaNhap = rs.getInt("gianhap");
+                int giaBan = rs.getInt("giaban");
                 int soLuong = rs.getInt("soluong");
 
                 TacGia tg = new TacGiaDAO().selectById(maTacGia);
@@ -91,8 +91,8 @@ public class SachDAO{
                 String maTheLoai = rs.getString("matheloai");
                 String moTa = rs.getString("mota");
                 String ngonNgu = rs.getString("ngonngu");
-                double giaNhap = rs.getDouble("gianhap");
-                double giaBan = rs.getDouble("giaban");
+                int giaNhap = rs.getInt("gianhap");
+                int giaBan = rs.getInt("giaban");
                 int soLuong = rs.getInt("soluong");
 
                 TacGia tg = new TacGiaDAO().selectById(maTacGia);
@@ -123,8 +123,8 @@ public class SachDAO{
                 String maTheLoai = rs.getString("matheloai");
                 String moTa = rs.getString("mota");
                 String ngonNgu = rs.getString("ngonngu");
-                double giaNhap = rs.getDouble("gianhap");
-                double giaBan = rs.getDouble("giaban");
+                int giaNhap = rs.getInt("gianhap");
+                int giaBan = rs.getInt("giaban");
                 int soLuong = rs.getInt("soluong");
 
                 TacGia tg = new TacGiaDAO().selectById(maTacGia);
