@@ -25,15 +25,6 @@ public class ChuanHoa {
         }
     }
 
-    public static boolean checkInt(String x){
-        try {
-            int n = Integer.parseInt(x);
-            return true;
-        } catch(Exception e) {
-            return false;
-        }
-    }
-
     public static boolean checkSDT(String x){
         if(!ChuanHoa.checkAll(x, Integer.MAX_VALUE).equals("")){
             if(x.trim().length() == 10){
@@ -80,24 +71,19 @@ public class ChuanHoa {
                     }
                 }
             }
-            if (ChuanHoa.checkInt(x)) {
-                if (Integer.parseInt(x) > tmp) {
-                    return "không được quá số lượng trong kho" + "(" + tmp + ")";
+            if (checkDouble(x)) {
+                if(Double.parseDouble(x) - (int)Double.parseDouble(x) != 0){
+                    return "phải là số nguyên";
                 }
-                else if (Integer.parseInt(x) <= 0) {
+                else if(Double.parseDouble(x) <= 0){
                     return "không được nhỏ hơn hoặc bằng 0";
                 }
-            }
-            else if (checkDouble(x)) {
-                if(Double.parseDouble(x) <= 0){
-                    return "không được nhỏ hơn hoặc bằng 0";
+                else if(Double.parseDouble(x) > Integer.MAX_VALUE){
+                    return "bị quá giới hạn số nguyên";
                 }
-                else {
-                    if(Double.parseDouble(x) - (int)Double.parseDouble(x) == 0){
-                        return "";
-                    }
+                else if(Double.parseDouble(x) > tmp){
+                    return "không được quá số lượng trong kho " + "(" + tmp + ")";
                 }
-                return "phải là số nguyên";
             }
             else if (kiTu && chuCai && dauCach) {
                 return "không được chứa kí tự đặc biệt, chữ cái, dấu cách";
@@ -116,8 +102,9 @@ public class ChuanHoa {
             }
             else
                 return "không được chứa chữ cái";
+            return "";
         }
-        return "";
+
     }
 
     public static String checkAll(String x) {
@@ -148,21 +135,16 @@ public class ChuanHoa {
                     }
                 }
             }
-            if (ChuanHoa.checkInt(x)) {
-                if (Integer.parseInt(x) <= 0) {
-                    return "không được nhỏ hơn hoặc bằng 0";
-                }
-            }
-            else if (checkDouble(x)) {
+            if (checkDouble(x)) {
                 if(Double.parseDouble(x) <= 0){
                     return "không được nhỏ hơn hoặc bằng 0";
                 }
-                else {
-                    if(Double.parseDouble(x) - (int)Double.parseDouble(x) == 0){
-                        return "";
-                    }
+                else if(Double.parseDouble(x) > Integer.MAX_VALUE){
+                    return "bị quá giới hạn số nguyên";
                 }
-                return "phải là số nguyên";
+                else if(Double.parseDouble(x) - (int)Double.parseDouble(x) != 0){
+                        return "phải là số nguyên";
+                }
             }
             else if (kiTu && chuCai && dauCach) {
                 return "không được chứa kí tự đặc biệt, chữ cái, dấu cách";
