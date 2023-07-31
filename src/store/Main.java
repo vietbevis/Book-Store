@@ -6,8 +6,10 @@ import controller.NhanVienDAO;
 import controller.SachDAO;
 import model.*;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,12 +18,16 @@ public class Main {
         while (run) {
             Menu.menuDangNhap();
             System.out.println("Lựa chọn của bạn là (1 or 2 or 0): ");
-            Character lc1 = sc.nextLine().charAt(0);
-
+            String lc1 = sc.nextLine();
+            Pattern p = Pattern.compile("^[0-2]$");
+            while(!p.matcher(lc1).find()){
+                System.out.println("Vui lòng nhập 1 số từ [0 - 2]");
+                lc1 = sc.nextLine();
+            }
             switch (lc1) {
 
                 // Khach Hang
-                case '1':
+                case "1":
                     System.out.println("Nhập mã khách hàng (A-z, 0-9) : ");
                     String maKhachHang = sc.nextLine();
                     KhachHang kh = new KhachHangDAO().selectById(maKhachHang);
@@ -38,16 +44,21 @@ public class Main {
                     boolean run1 = true;
                     while (run1){
                         Menu.menuKhachHang();
-                        Character lc2 = sc.nextLine().charAt(0);
+                        String lc2 = sc.nextLine();
+                        Pattern p1 = Pattern.compile("^[0-4]$");
+                        while(!p1.matcher(lc2).find()){
+                            System.out.println("Vui lòng nhập 1 số từ [0 - 4]");
+                            lc2 = sc.nextLine();
+                        }
                         switch (lc2) {
 
                             // Hiển thị toàn bộ sản phẩm hiện có
-                            case '1':
+                            case "1":
                                 Sach.showAll();
                                 break;
 
                             // Thêm sp vào giỏ hàng
-                            case '2':
+                            case "2":
                                 Sach s = GioHang.addSachToGioHang();
                                 while (gioHang.searchSach(s)){
                                     System.out.println("Đã có trong giỏ hàng !");
@@ -58,7 +69,7 @@ public class Main {
                                 break;
 
                             // Hiển thị giỏ hàng
-                            case '3':
+                            case "3":
 
                                 // Vao Gio Hang
 
@@ -68,11 +79,16 @@ public class Main {
                                     System.out.println("Tổng tiền phải thanh toán : " + gioHang.getTongTien());
                                     Menu.menuGioHang();
 
-                                    Character lc4 = sc.nextLine().charAt(0);
+                                    String lc4 = sc.nextLine();
+                                    Pattern p2 = Pattern.compile("^[0-3]$");
+                                    while(!p2.matcher(lc4).find()){
+                                        System.out.println("Vui lòng nhập 1 số từ [0 - 3]");
+                                        lc4 = sc.nextLine();
+                                    }
                                     switch (lc4) {
 
                                         // Xóa 1 sản phẩm khỏi giỏ hàng
-                                        case '1':
+                                        case "1":
                                             System.out.println("Nhập mã sách hoặc tên sách muốn xóa khỏi giỏ hàng : ");
                                             Sach s1 = new SachDAO().selectByBook(sc.nextLine());
                                             while (!gioHang.searchSach(s1)){
@@ -84,7 +100,7 @@ public class Main {
                                             break;
 
                                         // Xóa toàn bộ giỏ hàng
-                                        case '2':
+                                        case "2":
                                             System.out.println("Bạn chắc chắn muốn xóa toàn bộ giỏ hàng (Y/N) : ");
                                             Character clear = sc.nextLine().charAt(0);
                                             while (clear != 'y' && clear != 'Y' && clear != 'n' && clear != 'N'){
@@ -98,7 +114,7 @@ public class Main {
                                             break;
 
                                         // Mua hàng
-                                        case '3':
+                                        case "3":
                                             System.out.println("Xác nhận mua hàng (Y/N) : ");
                                             Character xn = sc.nextLine().charAt(0);
                                             while (xn != 'y' && xn != 'Y' && xn != 'n' && xn != 'N'){
@@ -118,7 +134,7 @@ public class Main {
                                                 System.out.println("Thành công !");
                                             }
                                             break;
-                                        case '0':
+                                        case "0":
                                             run3 = false;
                                             break;
                                     }
@@ -127,7 +143,7 @@ public class Main {
                                 break;
 
                             // Hiển thị đơn hàng
-                            case '4':
+                            case "4":
                                 ArrayList<DonHang> list = new DonHangDAO().selectByKhachHang(kh);
                                 for (DonHang x : list){
                                     System.out.println(x);
@@ -135,11 +151,16 @@ public class Main {
                                 boolean run4 = true;
                                 while(run4){
                                     Menu.menuDonHang();
-                                    Character lc5 = sc.nextLine().charAt(0);
+                                    String lc5 = sc.nextLine();
+                                    Pattern p3 = Pattern.compile("^[0-1]$");
+                                    while(!p3.matcher(lc5).find()){
+                                        System.out.println("Vui lòng nhập 0 hoặc 1");
+                                        lc5 = sc.nextLine();
+                                    }
                                     switch (lc5){
 
                                         // Hủy đơn hàng
-                                        case '1':
+                                        case "1":
                                             System.out.println("Nhập mã đơn hàng muốn hủy :");
                                             String ma = sc.nextLine();
                                             if(new DonHangDAO().search(ma, kh.getId())){
@@ -150,13 +171,13 @@ public class Main {
                                                 System.out.println("không tồn tại đơn hàng này !");
                                             }
                                             break;
-                                        case '0':
+                                        case "0":
                                             run4 = false;
                                             break;
                                     }
                                 }
                                 break;
-                            case '0':
+                            case "0":
                                 run1 = false;
                                 break;
                         }
@@ -165,7 +186,7 @@ public class Main {
                 // Out Khach Hang
 
                 //Nhan Vien
-                case '2':
+                case "2":
                     System.out.println("Nhập mã nhân viên (A-z, 0-9) : ");
                     String maNhanVien = sc.nextLine();
                     NhanVien nv = new NhanVienDAO().selectById(maNhanVien);
@@ -176,11 +197,16 @@ public class Main {
                     boolean runA = true;
                     while (runA){
                         Menu.menuNhanVien();
-                        Character lc3 = sc.nextLine().charAt(0);
+                        String lc3 = sc.nextLine();
+                        Pattern p4 = Pattern.compile("^[0-6]$");
+                        while(!p4.matcher(lc3).find()){
+                            System.out.println("Vui lòng nhập 1 số từ [0 - 6]");
+                            lc3 = sc.nextLine();
+                        }
                         switch (lc3) {
 
                             // Thêm sách vào kho
-                            case '1':
+                            case "1":
                                 System.out.println("Nhập số lượng sách khác nhau muốn thêm : ");
                                 String sl = sc.nextLine();
                                 while (!ChuanHoa.checkAll(sl).equals("")){
@@ -196,19 +222,19 @@ public class Main {
                                 break;
 
                             // Xuất kho
-                            case '2':
+                            case "2":
                                 GioHang.XuatKho();
                                 System.out.println("Thành công !");
                                 break;
 
                             // Thống kê kho
-                            case '3':
+                            case "3":
                                 SachDAO.thongKeSachTrongKho();
                                 System.out.println("Thành công !");
                                 break;
 
                             // Danh sách đơn hàng
-                            case '4':
+                            case "4":
                                 ArrayList<DonHang> list = new DonHangDAO().selectAll();
                                 for(DonHang x : list){
                                     System.out.print(x);
@@ -217,7 +243,7 @@ public class Main {
                                 break;
 
                             // Cập nhật trạng thái đơn hàng
-                            case '5':
+                            case "5":
                                 System.out.println("Nhập mã đơn hàng cần cập nhật :");
                                 String cn = sc.nextLine();
                                 DonHang dh = new DonHangDAO().selectById(cn);
@@ -230,7 +256,7 @@ public class Main {
                                 new DonHangDAO().update(dh);
 
                                 break;
-                            case '6':
+                            case "6":
                                 ArrayList<DonHang> dhDaGiao = new DonHangDAO().selectDHDaGiao();
                                 double loiNhuan = 0;
                                 for(DonHang x : dhDaGiao){
@@ -242,13 +268,13 @@ public class Main {
                                 }
                                 System.out.println("Lợi nhuận : " + loiNhuan);
                                 break;
-                            case '0':
+                            case "0":
                                 runA = false;
                                 break;
                         }
                     }
                     break;
-                case '0':
+                case "0":
                     run = false;
                     break;
                 // Out nhan vien
