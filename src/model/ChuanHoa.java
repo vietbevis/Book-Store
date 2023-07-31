@@ -33,36 +33,104 @@ public class ChuanHoa {
     }
 
     public static boolean checkSDT(String x){
-        try {
-            if(ChuanHoa.checkInt(x) && x.charAt(0) == '0' && x.trim().length() == 10){
+        if(!ChuanHoa.checkAll(x, Integer.MAX_VALUE).equals("")){
+            if(x.trim().length() == 10){
                 return true;
             }
-            return false;
+        }
+        return false;
+    }
+
+    public static boolean checkDouble(String x){
+        try {
+            double n = Double.parseDouble(x);
+            return true;
         } catch(Exception e) {
             return false;
         }
     }
 
-    public static boolean checkSoAm(String x, int k){
-        if(ChuanHoa.checkInt(x)){
-            if(Integer.parseInt(x) <= 0){
-                return false;
+    public static String checkAll(String x, int tmp) {
+        boolean kiTu = false, chuCai = false;
+        for (int i = 0; i < x.length(); i++) {
+            if (Character.isAlphabetic(x.charAt(i))) {
+                chuCai = true;
+            } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
+                kiTu = true;
             }
-            if(Integer.parseInt(x) > k){
-                return false;
-            }
-            return true;
         }
-        return false;
+        if (ChuanHoa.checkInt(x)) {
+            if (Integer.parseInt(x) > tmp) {
+                return "không được quá số lượng trong kho" + "(" + tmp + ")";
+            }
+            else if (Integer.parseInt(x) <= 0) {
+                return "không được nhỏ hơn hoặc bằng 0";
+            }
+        }
+        else if (checkDouble(x)) {
+            return "phải là số nguyên";
+        }
+        else if (kiTu && chuCai) {
+            return "không được chứa kí tự đặc biệt, chữ cái";
+        }
+        else if (kiTu && !chuCai) {
+            return "không được chứa kí tự đặc biệt";
+        }
+        else
+            return "không được chứa chữ cái";
+        return "";
     }
 
-    public static boolean checkSoAm(String x){
-        if(ChuanHoa.checkInt(x)){
-            if(Integer.parseInt(x) <= 0){
-                return false;
+    public static String checkAll(String x) {
+        boolean kiTu = false, chuCai = false;
+        for (int i = 0; i < x.length(); i++) {
+            if (Character.isAlphabetic(x.charAt(i))) {
+                chuCai = true;
+            } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
+                kiTu = true;
             }
-            return true;
         }
-        return false;
+        if (ChuanHoa.checkInt(x)) {
+            if (Integer.parseInt(x) <= 0) {
+                return "không được nhỏ hơn hoặc bằng 0";
+            }
+        }
+        else if (checkDouble(x)) {
+            return "phải là số nguyên";
+        }
+        else if (kiTu && chuCai) {
+            return "không được chứa kí tự đặc biệt, chữ cái";
+        }
+        else if (kiTu && !chuCai) {
+            return "không được chứa kí tự đặc biệt";
+        }
+        else
+            return "không được chứa chữ cái";
+        return "";
+    }
+
+    public static String checkAll1(String x) {
+        boolean kiTu = false, chuCai = false;
+        for (int i = 0; i < x.length(); i++) {
+            if (Character.isAlphabetic(x.charAt(i))) {
+                chuCai = true;
+            } else if (Character.isAlphabetic(x.charAt(i)) || !Character.isDigit(x.charAt(i))) {
+                kiTu = true;
+            }
+        }
+        if (ChuanHoa.checkDouble(x)) {
+            if (Integer.parseInt(x) <= 0) {
+                return "không được nhỏ hơn hoặc bằng 0";
+            }
+        }
+        else if (kiTu && chuCai) {
+            return "không được chứa kí tự đặc biệt, chữ cái";
+        }
+        else if (kiTu && !chuCai) {
+            return "không được chứa kí tự đặc biệt";
+        }
+        else
+            return "không được chứa chữ cái";
+        return "";
     }
 }

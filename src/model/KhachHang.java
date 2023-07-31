@@ -51,10 +51,10 @@ public class KhachHang extends User {
         setNgaySinh(Date.valueOf(birth));
         System.out.println("Nhập địa chỉ :");
         setDiaChi(sc.nextLine());
-        System.out.println("Nhập số điện thoại (10 chữ số) : ");
+        System.out.println("Nhập số điện thoại : ");
         String sdt = sc.nextLine();
         while (!ChuanHoa.checkSDT(sdt)){
-            System.out.println("Nhập sai, nhập lại :");
+            System.out.printf("Số điện thoại");
             sdt = sc.nextLine();
         }
         setSoDienThoai(sdt);

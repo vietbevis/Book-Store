@@ -6,7 +6,6 @@ import controller.NhanVienDAO;
 import controller.SachDAO;
 import model.*;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -182,10 +181,11 @@ public class Main {
 
                             // Thêm sách vào kho
                             case '1':
-                                System.out.println("Nhập số lượng sách muốn thêm : ");
+                                System.out.println("Nhập số lượng sách khác nhau muốn thêm : ");
                                 String sl = sc.nextLine();
-                                while (!ChuanHoa.checkInt(sl) || Integer.parseInt(sl) <= 0){
-                                    System.out.println("Nhập sai, nhập lại : ");
+                                while (!ChuanHoa.checkAll(sl).equals("")){
+                                    System.out.printf("Số lượng %s\n", ChuanHoa.checkAll(sl));
+                                    System.out.println("Vui lòng nhập lại :");
                                     sl = sc.nextLine();
                                 }
                                 for(int i=0 ; i<Integer.parseInt(sl) ; i++){

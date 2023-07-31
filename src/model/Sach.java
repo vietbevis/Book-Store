@@ -134,8 +134,8 @@ public class Sach {
         if(tmp != null){
             System.out.println("Nhập số lượng muốn thêm : ");
             String sl = sc.nextLine();
-            while (!ChuanHoa.checkSoAm(sl)){
-                System.out.println("Nhập sai, nhập lại : ");
+            while (!ChuanHoa.checkAll(sl).equals("")){
+                System.out.printf("Số lượng %s\n", ChuanHoa.checkAll(sl));
                 sl = sc.nextLine();
             }
             tmp.setSoLuong(tmp.getSoLuong() + Integer.parseInt(sl));
@@ -153,8 +153,8 @@ public class Sach {
             }
             System.out.println("Nhập năm xuất bản :");
             String nxb = sc.nextLine();
-            while (!ChuanHoa.checkSoAm(nxb)){
-                System.out.println("Nhập sai, nhập lại : ");
+            while (!ChuanHoa.checkAll(nxb).equals("")){
+                System.out.printf("Năm xuất bản %s\n", ChuanHoa.checkAll(nxb));
                 nxb = sc.nextLine();
             }
             setNamXuatBan(Integer.parseInt(nxb));
@@ -169,12 +169,30 @@ public class Sach {
             setNgonNgu(sc.nextLine());
             System.out.println("Nhập mô tả : ");
             setMoTa(sc.nextLine());
+
             System.out.println("Nhập giá nhập : ");
-            setGiaNhap(Double.parseDouble(sc.nextLine()));
+            String giaNhap = sc.nextLine();
+            while (!ChuanHoa.checkAll1(giaNhap).equals("")){
+                System.out.printf("Giá nhập %s\n", ChuanHoa.checkAll1(giaNhap));
+                giaNhap = sc.nextLine();
+            }
+            setGiaNhap(Double.parseDouble(giaNhap));
+
             System.out.println("Nhập giá bán : ");
-            setGiaBan(Double.parseDouble(sc.nextLine()));
+            String giaBan = sc.nextLine();
+            while (!ChuanHoa.checkAll1(giaBan).equals("")){
+                System.out.printf("Giá bán %s\n", ChuanHoa.checkAll1(giaBan));
+                giaBan = sc.nextLine();
+            }
+            setGiaBan(Double.parseDouble(giaBan));
+
             System.out.println("Nhập số lượng : ");
-            setSoLuong(Integer.parseInt(sc.nextLine()));
+            String soLuong = sc.nextLine();
+            while (!ChuanHoa.checkAll(soLuong).equals("")){
+                System.out.printf("Số lượng %s\n", ChuanHoa.checkAll(soLuong));
+                soLuong = sc.nextLine();
+            }
+            setSoLuong(Integer.parseInt(soLuong));
             new SachDAO().insert(this);
         }
     }

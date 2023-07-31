@@ -66,8 +66,8 @@ public class GioHang {
         System.out.println("Nhập số lượng muốn thêm : ");
         String soLuong = sc.nextLine();
         int soLuongKho = new SachDAO().selectByBook(s.getMaSach()).getSoLuong();
-        while(!ChuanHoa.checkSoAm(soLuong, soLuongKho)){
-            System.out.printf("Quá số lượng sách trong kho (%s) hoặc nhập sai, nhập lại\n", soLuongKho);
+        while(!ChuanHoa.checkAll(soLuong, soLuongKho).equals("")){
+            System.out.printf("Số lượng %s\n", ChuanHoa.checkAll(soLuong, soLuongKho));
             System.out.println("Nhập số lượng muốn thêm : ");
             soLuong = sc.nextLine();
         }
@@ -87,8 +87,8 @@ public class GioHang {
         System.out.println("Nhập số lượng muốn xuất : ");
         String soLuong = sc.nextLine();
         int soLuongKho = s.getSoLuong();
-        while(!ChuanHoa.checkSoAm(soLuong, soLuongKho)){
-            System.out.printf("Quá số lượng sách trong kho (%s) hoặc nhập sai, nhập lại\n", soLuongKho);
+        while(!ChuanHoa.checkAll(soLuong, soLuongKho).equals("")){
+            System.out.printf("Số lượng %s\n", ChuanHoa.checkAll(soLuong, soLuongKho));
             System.out.println("Nhập số lượng muốn xuất : ");
             soLuong = sc.nextLine();
         }
